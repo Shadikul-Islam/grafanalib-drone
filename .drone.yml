@@ -4,7 +4,7 @@ name: deploy-grafana-dashboard
 
 environment:
   GRAFANA_API_KEY:
-    from_secret: eyJrIjoic3Y1eG5QWUpzcUV4T2FyZ0FGak5kbVpwN25oQXFIc2EiLCJuIjoiRHJvbmUiLCJpZCI6MX0=
+    from_secret: grafana_api_key
 
 steps:
   - name: clone
