@@ -3,7 +3,7 @@ type: docker
 name: deploy-grafana-dashboard
 
 steps:
-  - name: clone
+  - name: clone-repo
     image: plugins/git
     settings:
       depth: 1
