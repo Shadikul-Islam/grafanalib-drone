@@ -28,3 +28,4 @@ steps:
       - apk add --no-cache curl jq
       - |
         curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $GRAFANA_API_KEY" --data-binary @system-monitoring.json http://13.215.53.36:3000/api/dashboards/db
+ 
