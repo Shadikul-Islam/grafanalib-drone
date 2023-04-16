@@ -3,33 +3,19 @@ type: docker
 name: deploy-grafana-dashboard
 
 steps:
-  - name: clone1
+  - name: clone
     image: plugins/git
     settings:
       depth: 1
 
-  - name: install-grafanalib2
+  - name: generate-and-deploy-dashboard
     image: python:3.8
     environment:
       GRAFANA_API_KEY:
         from_secret: grafana_api_key
     commands:
       - pip install grafanalib
-
-  - name: generate-dashboard3
-    image: python:3.8
-    environment:
-      GRAFANA_API_KEY:
-        from_secret: grafana_api_key
-    commands:
       - python system-monitoring.py > system-monitoring.json
-
-  - name: deploy-dashboard4
-    image: alpine
-    environment:
-      GRAFANA_API_KEY:
-        from_secret: grafana_api_key
-    commands:
       - apk add --no-cache curl jq
       - |
-        curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $GRAFANA_API_KEY" --data-binary @system-monitoring.json http://13.215.53.36:3000/?orgId=1/api/dashboards/db
+        curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $GRAFANA_API_KEY" --data-binary @system-monitoring.json http://13.215.53.36:3000/api/dashboards/db
