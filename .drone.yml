@@ -2,10 +2,6 @@ kind: pipeline
 type: docker
 name: deploy-grafana-dashboard
 
-environment:
-  GRAFANA_API_KEY:
-    from_secret: GRAFANA_API_KEY
-
 steps:
   - name: clone
     image: plugins/git
@@ -14,6 +10,9 @@ steps:
 
   - name: install-grafanalib
     image: python:3.8
+    environment:
+      GRAFANA_API_KEY:
+        from_secret: grafana_api_key
     commands:
       - pip install grafanalib
 
