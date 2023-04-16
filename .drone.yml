@@ -3,12 +3,12 @@ type: docker
 name: deploy-grafana-dashboard
 
 steps:
-  - name: clone
+  - name: clone1
     image: plugins/git
     settings:
       depth: 1
 
-  - name: install-grafanalib
+  - name: install-grafanalib2
     image: python:3.8
     environment:
       GRAFANA_API_KEY:
@@ -16,7 +16,7 @@ steps:
     commands:
       - pip install grafanalib
 
-  - name: generate-dashboard
+  - name: generate-dashboard3
     image: python:3.8
     environment:
       GRAFANA_API_KEY:
@@ -24,7 +24,7 @@ steps:
     commands:
       - python system-monitoring.py > system-monitoring.json
 
-  - name: deploy-dashboard
+  - name: deploy-dashboard4
     image: alpine
     environment:
       GRAFANA_API_KEY:
