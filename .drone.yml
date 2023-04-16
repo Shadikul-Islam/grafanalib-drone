@@ -3,10 +3,10 @@ type: docker
 name: deploy-grafana-dashboard
 
 steps:
-  - name: clone-repo
-    image: plugins/git
-    settings:
-      depth: 1
+  # - name: clone-repo
+  #   image: plugins/git
+  #   settings:
+  #     depth: 1
 
   - name: generate-and-deploy-dashboard
     image: python:3.8
