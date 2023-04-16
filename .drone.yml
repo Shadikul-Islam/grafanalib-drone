@@ -18,13 +18,18 @@ steps:
 
   - name: generate-dashboard
     image: python:3.8
+    environment:
+      GRAFANA_API_KEY:
+        from_secret: grafana_api_key
     commands:
-      - python system-monitoring.py >system-monitoring.json
+      - python system-monitoring.py > system-monitoring.json
 
   - name: deploy-dashboard
     image: alpine
+    environment:
+      GRAFANA_API_KEY:
+        from_secret: grafana_api_key
     commands:
       - apk add --no-cache curl jq
       - |
         curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $GRAFANA_API_KEY" --data-binary @system-monitoring.json http://13.215.53.36:3000/api/dashboards/db
-  
